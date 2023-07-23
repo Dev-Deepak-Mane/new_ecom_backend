@@ -50,7 +50,7 @@ app.use("/", payment);
 
 app.get("*", (req, res) => {
   //res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
-  res.sendFile("Welcome to Dell");
+  res.send("Welcome to Dell");
 });
 
 // Middleware for Errors
