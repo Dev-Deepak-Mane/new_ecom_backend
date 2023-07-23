@@ -46,10 +46,11 @@ app.use("/", user);
 app.use("/", order);
 app.use("/", payment);
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+//app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+  //res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+  res.sendFile("Welcome to Dell");
 });
 
 // Middleware for Errors
@@ -63,11 +64,6 @@ process.on("uncaughtException", (err) => {
   console.log(`Shutting down the server due to Uncaught Exception`);
   process.exit(1);
 });
-
-// // Config
-// if (process.env.NODE_ENV !== "PRODUCTION") {
-//   require("dotenv").config({ path: "backend/config/config.env" });
-// }
 
 // Connecting to database
 connectDatabase();
