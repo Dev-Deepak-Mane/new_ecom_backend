@@ -10,6 +10,12 @@ const sendToken = (user, statusCode, res) => {
     ),
     httpOnly: true,
   };
+
+  res.status(statusCode).cookie("token", token, options).json({
+    success: true,
+    user,
+    token,
+  });
   res.setHeader(
     "Set-Cookie",
     serialize("token", set ? token : "", {
@@ -18,11 +24,6 @@ const sendToken = (user, statusCode, res) => {
       maxAge: set ? 15 * 24 * 60 * 60 * 1000 : 0,
     })
   );
-  res.status(statusCode).cookie("token", token, options).json({
-    success: true,
-    user,
-    token,
-  });
 };
 
 module.exports = sendToken;
