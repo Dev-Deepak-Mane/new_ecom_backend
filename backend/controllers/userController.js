@@ -6,7 +6,7 @@ const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary");
 const getDatUri = require("../utils/dataUri");
-
+import { cookieSeter } from "../utils/jwtToken";
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   // console.log(myCloud);
@@ -56,7 +56,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHander("Invalid email or password", 401));
   }
-
+  cookieSeter(res, user, true);
   sendToken(user, 200, res);
 });
 
