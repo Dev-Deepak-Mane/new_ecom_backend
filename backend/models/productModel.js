@@ -10,6 +10,22 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Enter product Description"],
   },
+  specifications: {
+    type: String,
+    required: [true, "Please Enter product Specifications"],
+  },
+  compatibility: {
+    type: String,
+    required: [true, "Please Enter product Compatibility"],
+  },
+  issuesRecalls: {
+    type: String,
+    required: [true, "Please Enter product Issues/Recalls"],
+  },
+  installationInstructions: {
+    type: String,
+    required: [true, "Please Enter product Installation Instructions"],
+  },
   price: {
     type: Number,
     required: [true, "Please Enter product Price"],
@@ -35,7 +51,7 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Enter Product Category"],
   },
-  Stock: {
+  stock: {
     type: Number,
     required: [true, "Please Enter product Stock"],
     maxLength: [4, "Stock cannot exceed 4 characters"],
@@ -45,28 +61,6 @@ const productSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  reviews: [
-    {
-      user: {
-        type: mongoose.Schema.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      rating: {
-        type: Number,
-        required: true,
-      },
-      comment: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
@@ -77,5 +71,26 @@ const productSchema = mongoose.Schema({
     default: Date.now,
   },
 });
+
+// Middleware to generate unique serviceTag and modelNumber before saving
+productSchema.pre("save", function (next) {
+  // Generate unique serviceTag and modelNumber here
+  this.serviceTag = generateUniqueTag();
+  this.modelNumber = generateUniqueNumber();
+
+  next();
+});
+
+function generateUniqueTag() {
+  // Logic to generate unique serviceTag, e.g., random string or based on other fields
+  // Return the generated tag
+  return "ABC" + Math.random().toString(36).substr(2, 5).toUpperCase();
+}
+
+function generateUniqueNumber() {
+  // Logic to generate unique modelNumber, e.g., based on timestamp or sequential number
+  // Return the generated number
+  return "DELL" + Date.now().toString().substr(6);
+}
 
 module.exports = mongoose.model("Product", productSchema);
