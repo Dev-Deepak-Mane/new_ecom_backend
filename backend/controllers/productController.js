@@ -34,7 +34,26 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
   req.body.images = imagesLinks;
   req.body.user = req.user.id;
+// Middleware to generate unique serviceTag and modelNumber before saving
+productSchema.pre("save", function (next) {
+  // Generate unique serviceTag and modelNumber here
+  this.serviceTag = generateUniqueTag();
+  this.modelNumber = generateUniqueNumber();
 
+  next();
+});
+
+function generateUniqueTag() {
+  // Logic to generate unique serviceTag, e.g., random string or based on other fields
+  // Return the generated tag
+  return "ABC" + Math.random().toString(36).substr(2, 5).toUpperCase();
+}
+
+function generateUniqueNumber() {
+  // Logic to generate unique modelNumber, e.g., based on timestamp or sequential number
+  // Return the generated number
+  return "DELL" + Date.now().toString().substr(6);
+}
   const product = await Product.create(req.body);
 
   res.status(201).json({
