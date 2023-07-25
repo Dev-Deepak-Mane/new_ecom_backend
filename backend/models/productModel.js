@@ -72,25 +72,6 @@ const productSchema = mongoose.Schema({
   },
 });
 
-// Middleware to generate unique serviceTag and modelNumber before saving
-productSchema.pre("save", function (next) {
-  // Generate unique serviceTag and modelNumber here
-  this.serviceTag = generateUniqueTag();
-  this.modelNumber = generateUniqueNumber();
 
-  next();
-});
-
-function generateUniqueTag() {
-  // Logic to generate unique serviceTag, e.g., random string or based on other fields
-  // Return the generated tag
-  return "ABC" + Math.random().toString(36).substr(2, 5).toUpperCase();
-}
-
-function generateUniqueNumber() {
-  // Logic to generate unique modelNumber, e.g., based on timestamp or sequential number
-  // Return the generated number
-  return "DELL" + Date.now().toString().substr(6);
-}
 
 module.exports = mongoose.model("Product", productSchema);
