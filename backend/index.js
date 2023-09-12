@@ -27,6 +27,7 @@ app.use(function (req, res, next) {
 app.use(
   cors({
     origin: "*" ,
+      credentials: true,
   })
 );
 //app.use(cors({ origin: "*" }));
