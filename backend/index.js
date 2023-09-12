@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
 });
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://dev-deepak-ecom.vercel.app/" || "http://localhost:3000",
   })
 );
 //app.use(cors({ origin: "*" }));
