@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
 });
 app.use(
   cors({
-    origin: "*" || "https://dev-deepak-ecom.vercel.app",
+    origin: "*" ,
   })
 );
 //app.use(cors({ origin: "*" }));
