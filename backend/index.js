@@ -1,8 +1,3 @@
-
-
-
-
-
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -21,6 +16,13 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 }
 
 app.use(function (req, res, next) {
+
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // Replace with your specific origin(s)
+  res.header("Access-Control-Allow-Methods", "POST, PUT","DELETE","PATCH","GET"); // Include the allowed methods
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization"); // Include the allowed headers
+  res.header("Access-Control-Allow-Credentials", true); // Enable credentials if needed
+
+ 
   res.header("Access-Control-Allow-Origin", req.headers.origin);
   res.header("Access-Control-Allow-Credentials", true);
   res.header(
