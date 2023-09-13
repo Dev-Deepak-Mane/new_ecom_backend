@@ -1,3 +1,8 @@
+
+
+
+
+
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -10,28 +15,50 @@ const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/database");
 const dotenv = require("dotenv");
 dotenv.config();
+// Config
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "backend/config/config.env" });
+}
 
-// Configure CORS
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://frontend-thedpmane.vercel.app"
-];
-
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    origin: "*",
+      credentials: true,
+     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: "Content-Type,Authorization",
   })
 );
 
+// // Configure CORS
+// const allowedOrigins = [
+//   "http://localhost:3000",
+//   "https://frontend-thedpmane.vercel.app"
+// ];
+
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     credentials: true,
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     allowedHeaders: "Content-Type,Authorization",
+//   })
+// );
+//app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,7 +75,10 @@ app.use("/", user);
 app.use("/", order);
 app.use("/", payment);
 
+//app.use(express.static(path.join(__dirname, "../frontend/build")));
+
 app.get("*", (req, res) => {
+  //res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
   res.send("Welcome to Dell");
 });
 
@@ -73,8 +103,8 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const server = app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server is working on http://localhost:${process.env.PORT || 3000}`);
+const server = app.listen(process.env.PORT, () => {
+  console.log(`Server is working on http://localhost:${process.env.PORT}`);
 });
 
 // Unhandled Promise Rejection
