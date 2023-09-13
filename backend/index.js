@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
 });
 app.use(
   cors({
-    origin: 'https://frontend-lyart-ten.vercel.app',
+    origin: 'https://frontend-thedpmane.vercel.app',
     credentials: true,
   })
 );
