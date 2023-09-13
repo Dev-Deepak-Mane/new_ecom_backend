@@ -22,7 +22,7 @@ app.use(
       "https://frontend-thedpmane.vercel.app",
     ],
     credentials: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
     allowedHeaders: "Content-Type,Authorization",
   })
 );
