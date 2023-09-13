@@ -31,7 +31,10 @@ app.use(function (req, res, next) {
 });
 app.use(
   cors({
-    origin: "*",
+    origin:  [
+   "http://localhost:3000",
+   "https://frontend-thedpmane.vercel.app"
+ ],
       credentials: true,
      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: "Content-Type,Authorization",
