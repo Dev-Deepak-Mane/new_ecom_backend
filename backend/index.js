@@ -14,6 +14,15 @@ dotenv.config();
 if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config({ path: "backend/config/config.env" });
 }
+
+app.use((req, res, next) => {
+  res.setHeader('https://frontend-thedpmane.vercel.app', 'http://localhost:3000');
+  // Add other necessary headers as needed
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 app.use(
   cors({
     origin: ['https://frontend-thedpmane.vercel.app','http://localhost:3000'],
@@ -22,16 +31,6 @@ app.use(
     allowedHeaders: 'Content-Type,Authorization',
   })
 );
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
 //app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(cookieParser());
