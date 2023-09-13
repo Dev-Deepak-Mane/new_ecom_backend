@@ -15,54 +15,17 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config({ path: "backend/config/config.env" });
 }
 
-app.use(function (req, res, next) {
-
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // Replace with your specific origin(s)
-  res.header("Access-Control-Allow-Methods", "POST, PUT","DELETE","PATCH","GET"); // Include the allowed methods
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization"); // Include the allowed headers
-  res.header("Access-Control-Allow-Credentials", true); // Enable credentials if needed
-
- 
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
 app.use(
   cors({
-    origin:  [
-   "http://localhost:3000",
-   "https://frontend-thedpmane.vercel.app"
- ],
-      credentials: true,
-     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    origin: [
+      "http://localhost:3000",
+      "https://frontend-thedpmane.vercel.app",
+    ],
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: "Content-Type,Authorization",
   })
 );
-
-// // Configure CORS
-// const allowedOrigins = [
-//   "http://localhost:3000",
-//   "https://frontend-thedpmane.vercel.app"
-// ];
-
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     credentials: true,
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     allowedHeaders: "Content-Type,Authorization",
-//   })
-// );
 //app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(cookieParser());
