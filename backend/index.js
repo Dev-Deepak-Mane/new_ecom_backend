@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
 });
 app.use(
   cors({
-    origin: 'https://drab-erin-bandicoot-hem.cyclic.app',
+    origin: 'https://frontend-lyart-ten.vercel.app/',
     credentials: true,
   })
 );
