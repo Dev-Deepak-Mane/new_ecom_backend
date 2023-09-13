@@ -28,7 +28,7 @@ app.use(
     ],
     credentials: true,
     methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
-    allowedHeaders: "Content-Type,Authorization",
+allowedHeaders: "Content-Type, Authorization",
   })
 );
 //app.use(cors({ origin: "*" }));
