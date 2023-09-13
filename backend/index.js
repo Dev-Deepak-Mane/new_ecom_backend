@@ -28,6 +28,8 @@ app.use(
   cors({
     origin: ['https://frontend-thedpmane.vercel.app','http://localhost:3000'],
     credentials: true,
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Specify the allowed HTTP methods
+    allowedHeaders: 'Content-Type,Authorization',
   })
 );
 //app.use(cors({ origin: "*" }));
