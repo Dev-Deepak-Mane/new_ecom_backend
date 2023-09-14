@@ -10,22 +10,6 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Enter product Description"],
   },
-  specifications: {
-    type: String,
-    required: [true, "Please Enter product Specifications"],
-  },
-  compatibility: {
-    type: String,
-    required: [true, "Please Enter product Compatibility"],
-  },
-  issuesRecalls: {
-    type: String,
-    required: [true, "Please Enter product Issues/Recalls"],
-  },
-  installationInstructions: {
-    type: String,
-    required: [true, "Please Enter product Installation Instructions"],
-  },
   price: {
     type: Number,
     required: [true, "Please Enter product Price"],
@@ -51,7 +35,7 @@ const productSchema = mongoose.Schema({
     type: String,
     required: [true, "Please Enter Product Category"],
   },
-  stock: {
+  Stock: {
     type: Number,
     required: [true, "Please Enter product Stock"],
     maxLength: [4, "Stock cannot exceed 4 characters"],
@@ -61,6 +45,28 @@ const productSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  reviews: [
+    {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      rating: {
+        type: Number,
+        required: true,
+      },
+      comment: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
@@ -71,7 +77,5 @@ const productSchema = mongoose.Schema({
     default: Date.now,
   },
 });
-
-
 
 module.exports = mongoose.model("Product", productSchema);
