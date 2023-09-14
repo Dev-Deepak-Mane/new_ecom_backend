@@ -34,13 +34,13 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
   req.body.images = imagesLinks;
   req.body.user = req.user.id;
-// Middleware to generate unique serviceTag and modelNumber before saving
-productSchema.pre("save", function (next) {
-  // Generate unique serviceTag and modelNumber here
-  this.serviceTag = generateUniqueTag();
-  this.modelNumber = generateUniqueNumber();
 
-  next();
+  const product = await Product.create(req.body);
+
+  res.status(201).json({
+    success: true,
+    product,
+  });
 });
 
 function generateUniqueTag() {
