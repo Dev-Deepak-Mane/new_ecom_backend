@@ -24,7 +24,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://leloecom.vercel.app/",
+      "https://leloecom.vercel.app",
     ],
     credentials: true,
     methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
