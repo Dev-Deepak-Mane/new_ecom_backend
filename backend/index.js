@@ -23,6 +23,7 @@ app.use((req, res, next) => {
 app.use(
   cors({
     origin: [
+      "https://lelo-beta.vercel.app",
       "http://localhost:3000",
       "https://leloecom.vercel.app",
     ],
