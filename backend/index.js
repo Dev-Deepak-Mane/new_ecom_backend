@@ -24,7 +24,6 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://lelo-dun.vercel.app",
       "https://lelo-dev-deepak-mane.vercel.app",
       "https://lelo-8vtgcvjq3-dev-deepak-mane.vercel.app",
     ],
