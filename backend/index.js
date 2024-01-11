@@ -33,6 +33,7 @@ app.use(
 allowedHeaders: "Content-Type, Authorization",
   })
 );
+
 //app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(cookieParser());
